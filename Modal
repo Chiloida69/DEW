@@ -112,7 +112,7 @@
                             data-bs-target="#modalEditarProduto"
                             data-id="{{ produto.id}}"
                             data-tamanho="{{produto.Tamanho}}"
-                            data-quantidade="produto.Quantidade"
+                            data-quantidade="{{produto.Quantidade}}"
                         >
                             <i class="bi bi-pencil"></i></button>
                             <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
