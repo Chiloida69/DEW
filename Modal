@@ -165,8 +165,9 @@
   </div>
 </div>
     <!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
-const modal = document.getElementById('modalEditarProduto')
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script> modal = document.getElementById('modalEditarProduto')
 
 modal.addEventListener('show.bs.modal', function (event) {
   const button = event.relatedTarget
