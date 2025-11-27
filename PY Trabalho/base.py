@@ -197,7 +197,21 @@ def consulta():
     # Renderiza o template enviando a lista e o termo pesquisado
     # Importante: termo if termo else "" evita enviar None para o HTML
     return render_template('estoque.html', lista_produtos=lista_exibida, termo_pesquisa=termo if termo else "")
-    
+
+@app.route('/editar-produto', methods = ["POST", "PUT"])
+def editar_produto():
+    metodo = request.form.get("_method", "POST").upper()
+
+    if metodo == "PUT":
+        id_produto = request.form['id']
+        tamanho = request.form['tamanho']
+        quantidade = request.form['quantidade']
+
+        supabase.table('Produtos').update({
+            'Tamanho': tamanho,
+            'Quantidade' : int(quantidade)
+        }).eq('id',id_produto).execute()
+    return redirect(url_for('consulta'))
 
 if __name__ == '__main__':
     app.run(debug=True)
