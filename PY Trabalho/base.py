@@ -211,7 +211,7 @@ def editar_produto():
             'Tamanho': tamanho,
             'Quantidade' : int(quantidade)
         }).eq('id',id_produto).execute()
-        flash("Produto atualizado com sucesso.", "success")
+        flash("Produto atualizado com sucesso.", "success")  # Trará a mensagem caso o produto seja alterado 
     return redirect(url_for('consulta'))
 
 if __name__ == '__main__':
