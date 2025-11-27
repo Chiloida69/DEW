@@ -107,7 +107,14 @@
                             </span>
                         </td>
                         <td class="text-end align-middle">
-                            <button class="btn btn-sm btn-outline-light"><i class="bi bi-pencil"></i></button>
+                            <button class="btn btn-sm btn-outline-light"
+                            data-bs-toggle="modal"
+                            data-bs-target="#modalEditarProduto"
+                            data-id="{{ produto.id}}"
+                            data-tamanho="{{produto.Tamanho}}"
+                            data-quantidade="{{produto.Quantidade}}"
+                        >
+                            <i class="bi bi-pencil"></i></button>
                             <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
                         </td>
                     </tr>
@@ -122,9 +129,54 @@
 
         </div>
     </div>
+<div class="modal fade" id="modalEditarProduto" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
 
+      <form method="POST" action="{{ url_for('editar_produto') }}">
+            <input type="hidden" name="_method" value="PUT">
+        <div class="modal-header">
+          <h5 class="modal-title">Editar Produto</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <div class="modal-body">
+          <input type="hidden" name="id" id="edit-id">
+
+          <div class="mb-3">
+            <label>Tamanho</label>
+            <input type="text" class="form-control" name="tamanho" id="edit-tamanho">
+          </div>
+
+          <div class="mb-3">
+            <label>Quantidade</label>
+            <input type="number" class="form-control" name="quantidade" id="edit-quantidade" min="0" required >
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Salvar</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>
     <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script> modal = document.getElementById('modalEditarProduto')
+
+modal.addEventListener('show.bs.modal', function (event) {
+  const button = event.relatedTarget
+
+    document.getElementById('edit-id').value = button.getAttribute('data-id')
+    document.getElementById('edit-tamanho').value = button.getAttribute('data-tamanho')
+    document.getElementById('edit-quantidade').value = button.getAttribute('data-quantidade')
+})
+</script>
 </body>
 
 </html>
