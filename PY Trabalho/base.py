@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for , flash
 from flask_wtf import FlaskForm # import FlaskForm from flask_wtf que faz 
 from dotenv import load_dotenv #gerencia chaves de ambiente
 from wtforms import StringField, PasswordField, SubmitField
@@ -211,6 +211,7 @@ def editar_produto():
             'Tamanho': tamanho,
             'Quantidade' : int(quantidade)
         }).eq('id',id_produto).execute()
+        flash("Produto atualizado com sucesso.", "success")
     return redirect(url_for('consulta'))
 
 if __name__ == '__main__':
