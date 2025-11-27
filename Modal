@@ -33,3 +33,18 @@
     </div>
   </div>
 </div>
+
+- Javascript
+
+<script>
+const modal = document.getElementById('modalEditarProduto')
+
+modal.addEventListener('show.bs.modal', function (event) {
+  const botao = event.relatedTarget
+
+  document.getElementById('edit-id').value = botao.getAttribute('data-id')
+  document.getElementById('edit-tamanho').value = botao.getAttribute('data-tamanho')
+  document.getElementById('edit-quantidade').value = botao.getAttribute('data-quantidade')
+})
+</script>
+
