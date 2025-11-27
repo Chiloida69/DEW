@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for , flash
 from flask_wtf import FlaskForm # import FlaskForm from flask_wtf que faz 
 from dotenv import load_dotenv #gerencia chaves de ambiente
 from wtforms import StringField, PasswordField, SubmitField
@@ -197,7 +197,22 @@ def consulta():
     # Renderiza o template enviando a lista e o termo pesquisado
     # Importante: termo if termo else "" evita enviar None para o HTML
     return render_template('estoque.html', lista_produtos=lista_exibida, termo_pesquisa=termo if termo else "")
-    
+
+@app.route('/editar-produto', methods = ["POST", "PUT"])
+def editar_produto():
+    metodo = request.form.get("_method", "POST").upper()
+
+    if metodo == "PUT":
+        id_produto = request.form['id']
+        tamanho = request.form['tamanho']
+        quantidade = request.form['quantidade']
+
+        supabase.table('Produtos').update({
+            'Tamanho': tamanho,
+            'Quantidade' : int(quantidade)
+        }).eq('id',id_produto).execute()
+        flash("Produto atualizado com sucesso.", "success")  # Trará a mensagem caso o produto seja alterado 
+    return redirect(url_for('consulta'))
 
 if __name__ == '__main__':
     app.run(debug=True)
